@@ -1,0 +1,585 @@
+/* ═══════════════════════════════════════════════════════════════
+   MAVDEE — Animations CSS
+   Page transitions · scroll-reveal · toast system · image blur-up
+   · micro-interactions · skeleton pulses
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Page Transitions ────────────────────────────────────────── */
+html.page-transition-in body {
+    animation: pageFadeIn 0.30s ease forwards;
+}
+
+html.page-transition-out body {
+    animation: pageFadeOut 0.22s ease forwards;
+    pointer-events: none;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pageFadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+/* ── Scroll-reveal ───────────────────────────────────────────── */
+.reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+    will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger cascade for sibling reveals */
+.reveal-on-scroll:nth-child(1) {
+    transition-delay: 0.00s;
+}
+
+.reveal-on-scroll:nth-child(2) {
+    transition-delay: 0.07s;
+}
+
+.reveal-on-scroll:nth-child(3) {
+    transition-delay: 0.14s;
+}
+
+.reveal-on-scroll:nth-child(4) {
+    transition-delay: 0.21s;
+}
+
+.reveal-on-scroll:nth-child(5) {
+    transition-delay: 0.28s;
+}
+
+.reveal-on-scroll:nth-child(6) {
+    transition-delay: 0.35s;
+}
+
+.reveal-on-scroll:nth-child(7) {
+    transition-delay: 0.42s;
+}
+
+.reveal-on-scroll:nth-child(8) {
+    transition-delay: 0.49s;
+}
+
+/* Horizontal reveal variant */
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-28px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(28px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Scale-in reveal */
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.reveal-scale.is-visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ── Blur-up lazy image loading ──────────────────────────────── */
+.img-blur-up {
+    filter: blur(10px);
+    transition: filter 0.50s ease;
+    will-change: filter;
+}
+
+.img-blur-up.img-loaded {
+    filter: blur(0);
+}
+
+/* ── Toast Notifications ─────────────────────────────────────── */
+.toast-container {
+    position: fixed;
+    bottom: calc(var(--bottom-nav-height, 60px) + 16px);
+    right: 18px;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 340px;
+    pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+    .toast-container {
+        bottom: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .toast-container {
+        bottom: calc(var(--bottom-nav-height, 60px) + 12px);
+        right: 10px;
+        left: 10px;
+        max-width: unset;
+    }
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    border-radius: 10px;
+    background: var(--ink, #1C1C1C);
+    color: #fff;
+    font-family: var(--f-body, 'DM Sans', sans-serif);
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.20);
+    pointer-events: auto;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(14px) scale(0.96);
+    transition: opacity 0.28s ease, transform 0.28s ease;
+    will-change: opacity, transform;
+    user-select: none;
+}
+
+.toast.toast-show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.toast-success {
+    background: #0D5C2C;
+}
+
+.toast-error {
+    background: var(--pink, #FF3F6C);
+}
+
+.toast-info {
+    background: #0A3D6B;
+}
+
+.toast-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.toast-msg {
+    flex: 1;
+    line-height: 1.4;
+}
+
+/* Progress bar on toast */
+.toast-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 0 0 10px 10px;
+    animation: toastProgress linear forwards;
+}
+
+@keyframes toastProgress {
+    from {
+        width: 100%;
+    }
+
+    to {
+        width: 0%;
+    }
+}
+
+/* ── Product card hover micro-interactions ───────────────────── */
+.p-card {
+    --_scale: 1;
+    transform: scale(var(--_scale)) translateY(0);
+}
+
+.p-card:hover {
+    --_scale: 1.004;
+}
+
+/* Wishlist heart pulse */
+@keyframes heartPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.35);
+    }
+
+    60% {
+        transform: scale(0.9);
+    }
+}
+
+.p-card__wish.pulse {
+    animation: heartPulse 0.4s ease;
+}
+
+/* ── Cart badge bounce ───────────────────────────────────────── */
+@keyframes badgePop {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(1.4);
+    }
+
+    70% {
+        transform: scale(0.88);
+    }
+}
+
+.cart-badge.pop {
+    animation: badgePop 0.38s ease;
+}
+
+/* ── Add to cart confirmation ripple ─────────────────────────── */
+.btn-atc-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-atc-ripple::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.28);
+    opacity: 0;
+    border-radius: inherit;
+    animation: rippleFlash 0.5s ease forwards;
+}
+
+@keyframes rippleFlash {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+/* ── Skeleton shimmer ────────────────────────────────────────── */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+    border-radius: 6px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ── Loading spinner ─────────────────────────────────────────── */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Button spinner ──────────────────────────────────────────── */
+.spinner--btn {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.38);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* ── Filter chip selected animation ─────────────────────────── */
+.filter-chip {
+    transition: all 0.18s ease;
+}
+
+.filter-chip.active {
+    animation: chipPop 0.2s ease;
+}
+
+@keyframes chipPop {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.94);
+    }
+}
+
+/* ── Sort/filter slide-down panel ────────────────────────────── */
+.filter-panel-animated {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+    opacity: 0;
+}
+
+.filter-panel-animated.open {
+    max-height: 600px;
+    opacity: 1;
+}
+
+/* ── Hero zoom (scope away from fixed nav) ───────────────────── */
+.hero {
+    isolation: isolate;
+}
+
+.hero-bg-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-bg-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: heroZoom 22s infinite alternate linear;
+    transform-origin: center center;
+    will-change: transform;
+}
+
+@keyframes heroZoom {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.07);
+    }
+}
+
+/* ── Carousel slide transition ───────────────────────────────── */
+.carousel-track {
+    transition: transform 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Float / hover effect on promo cards ────────────────────── */
+@keyframes floatCard {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+.promo-card--float {
+    animation: floatCard 3.5s ease-in-out infinite;
+}
+
+.promo-card--float:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.promo-card--float:nth-child(3) {
+    animation-delay: 0.8s;
+}
+
+/* ── Image hover-zoom for product gallery ────────────────────── */
+.img-zoom-wrap {
+    overflow: hidden;
+}
+
+.img-zoom-wrap img {
+    transition: transform 0.5s ease;
+    will-change: transform;
+}
+
+.img-zoom-wrap:hover img {
+    transform: scale(1.06);
+}
+
+/* ── Success / Checkmark animation ──────────────────────────── */
+@keyframes checkmarkDraw {
+    0% {
+        stroke-dashoffset: 50;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes checkCircle {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: scale(1.12);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.check-circle-anim {
+    animation: checkCircle 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.checkmark-path {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: checkmarkDraw 0.4s 0.3s ease forwards;
+}
+
+/* ── Pulse ring (live indicator) ─────────────────────────────── */
+@keyframes pulseRing {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+.pulse-ring {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--green, #03A685);
+    position: relative;
+    display: inline-block;
+}
+
+.pulse-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: inherit;
+    animation: pulseRing 1.5s ease-out infinite;
+}
+
+/* ── Stagger fade-in utility ─────────────────────────────────── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.45s ease both;
+}
+
+.fade-in-up-2 {
+    animation: fadeInUp 0.45s 0.10s ease both;
+}
+
+.fade-in-up-3 {
+    animation: fadeInUp 0.45s 0.20s ease both;
+}
+
+.fade-in-up-4 {
+    animation: fadeInUp 0.45s 0.30s ease both;
+}
+
+.fade-in {
+    animation: fadeIn 0.35s ease both;
+}
+
+.scale-in {
+    animation: scaleIn 0.35s ease both;
+}
+
+/* ── Reduce motion support ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

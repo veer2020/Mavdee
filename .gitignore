@@ -1,0 +1,29 @@
+# ── Environment / Secrets ──────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Composer dependencies ──────────────────────────────────
+/vendor/
+
+# ── Runtime data ───────────────────────────────────────────
+/logs/
+/uploads/
+/.trash/
+
+# ── Server-specific ────────────────────────────────────────
+php.ini
+.htpasswd
+
+# ── IDE / OS ───────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# ── Other ──────────────────────────────────────────────────
+*.log
+node_modules/
+

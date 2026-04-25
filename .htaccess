@@ -1,0 +1,128 @@
+# Force HTTPS
+RewriteEngine On
+DirectoryIndex index.php index.html
+
+# Error Documents
+ErrorDocument 403 /403.php
+ErrorDocument 404 /404.php
+ErrorDocument 500 /500.php
+
+# Block direct web access to sensitive config files
+RewriteRule ^config/config\.php$ - [F,L,NC]
+RewriteRule ^config/database\.php$ - [F,L,NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ===================================
+# SECURITY HEADERS (Fix Frame Error)
+# ===================================
+
+# Prevent MIME type detection
+Header always set X-Content-Type-Options "nosniff"
+
+# Enable XSS protection
+Header always set X-XSS-Protection "1; mode=block"
+
+# Allow iframes from same origin (FIXES THE ERROR)
+Header always set X-Frame-Options "SAMEORIGIN"
+
+# Content Security Policy is managed dynamically by PHP (config/config.php) using
+# a per-request nonce. Do NOT set a static CSP here as it would conflict.
+# Referrer Policy
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Force HTTPS Strict Transport Security
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+Options -Indexes
+
+# Block direct access to sensitive file types
+<FilesMatch "\.(sql|log|env|sh|bak|old|dist)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# Block direct access to /config/ directory
+<IfModule mod_rewrite.c>
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^security/ - [F,L]
+    RewriteRule ^migrations/ - [F,L]
+</IfModule>
+
+# Protect .env files from direct web access
+<FilesMatch "^\.env(\..*)?$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+# PHP settings — applied when running under mod_php (common on VPS/cPanel).
+# Hostinger uses PHP-FPM, so these blocks are skipped there; use php.ini instead.
+# Three blocks are required because different Apache+PHP builds use different module names.
+<IfModule mod_php.c>
+    php_value upload_max_filesize 20M
+    php_value post_max_size 25M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+<IfModule mod_php7.c>
+    php_value upload_max_filesize 20M
+    php_value post_max_size 25M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+<IfModule mod_php8.c>
+    php_value upload_max_filesize 20M
+    php_value post_max_size 25M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
+
+# Error pages
+ErrorDocument 404 /404.php
+ErrorDocument 403 /403.php
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set X-XSS-Protection "1; mode=block"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# Block PHP execution in the uploads directory
+<IfModule mod_rewrite.c>
+    RewriteRule ^uploads/.*\.(php|phtml|php3|php4|php5|php7|phar|cgi|pl|py|sh)$ - [F,L,NC]
+</IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+<IfModule mod_brotli.c>
+    AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType application/json "access plus 0 seconds"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

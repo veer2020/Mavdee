@@ -1,0 +1,969 @@
+/* ═══════════════════════════════════════════════════════════════
+   MAVDEE — Desktop CSS
+   All rules scoped to min-width: 1024px (or 768px where noted)
+   so the mobile experience in global.css + mobile.css is untouched.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Global fix for Swiper images not appearing ──────────────── */
+.swiper-slide img,
+.main-img-slide {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ── Desktop layout constants ────────────────────────────────── */
+@media (min-width: 1024px) {
+  :root {
+    --desktop-header-row-height: 72px;
+    --desktop-cat-navbar-height: 46px;
+    --desktop-header-total: calc(var(--desktop-header-row-height) + var(--desktop-cat-navbar-height));
+  }
+
+  .main-content {
+    min-height: calc(100vh - var(--desktop-header-total, 118px));
+  }
+}
+
+/* ── Desktop: hide mobile-only patterns ──────────────────────── */
+@media (min-width: 1024px) {
+  .cat-icons-row {
+    display: none !important;
+  }
+
+  .cat-tabs-wrap {
+    display: none !important;
+  }
+
+  .mobile-sort-bar {
+    display: none !important;
+  }
+
+  .pdp-sticky-cta {
+    display: none !important;
+  }
+
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+}
+
+/* ── Desktop: make cat tabs non-sticky (desktop cat-nav handles it) */
+@media (min-width: 1024px) {
+  .cat-tabs-wrap {
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DESKTOP HEADER ENHANCEMENTS
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .site-header {
+    box-shadow: 0 1px 0 var(--border, #EAEAEC) !important;
+  }
+
+  .site-header.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.09) !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DESKTOP ANNOUNCEMENT BAR
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .desktop-announcement-bar {
+    background: var(--ink, #1C1C1C);
+    color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 7px 24px;
+    letter-spacing: 0.04em;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+  }
+
+  .desktop-announcement-bar a {
+    color: var(--amber, #F9A825);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .desktop-announcement-bar a:hover {
+    text-decoration: underline;
+  }
+
+  .desktop-announcement-bar .ann-sep {
+    opacity: 0.25;
+    font-size: 10px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CAROUSEL — DESKTOP ENHANCEMENTS
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .carousel-info {
+    padding: 48px 56px 40px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.60) 0%, transparent 100%);
+  }
+
+  .carousel-brand {
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  .carousel-name {
+    font-size: 2.1rem;
+    font-weight: 800;
+    line-height: 1.12;
+    margin: 0 0 10px;
+    letter-spacing: -0.02em;
+    max-width: 560px;
+  }
+
+  .carousel-price {
+    font-size: 15px;
+    opacity: 0.88;
+    font-weight: 500;
+  }
+
+  .carousel-dots {
+    bottom: 24px;
+    right: 56px;
+    gap: 7px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .carousel-dot.active {
+    width: 26px;
+    border-radius: 4px;
+  }
+
+  .carousel-arrow {
+    display: flex !important;
+  }
+
+  .carousel-cta {
+    display: inline-block;
+    margin-top: 16px;
+    background: #fff;
+    color: var(--ink, #1C1C1C);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 10px 24px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .carousel-cta:hover {
+    background: var(--pink, #FF3F6C);
+    color: #fff;
+  }
+}
+
+.carousel-cta {
+  display: none;
+}
+
+@media (min-width: 1400px) {
+  .carousel-slide img {
+    max-height: 560px;
+    object-fit: cover;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PRODUCT GRIDS — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .prod-grid-section .prod-grid {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 0 32px;
+    gap: 18px;
+  }
+
+  .prod-grid-section {
+    padding-top: 8px;
+    padding-bottom: 20px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .shop-layout {
+    grid-template-columns: 260px 1fr !important;
+    gap: 28px !important;
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .shop-main .prod-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 18px !important;
+  }
+}
+
+/* ── Trend cards: no horizontal scroll on desktop ────────────── */
+@media (min-width: 1024px) {
+  .trend-cards-section .trend-cards-scroll {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    overflow-x: visible;
+    flex-wrap: wrap;
+    padding: 0 32px 16px;
+    gap: 16px;
+    justify-content: flex-start;
+    scroll-snap-type: none;
+  }
+
+  .trend-cards-section .trend-card {
+    flex: 0 0 auto;
+    width: calc(12.5% - 14px);
+    min-width: 120px;
+    scroll-snap-align: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .trend-cards-section .trend-cards-scroll {
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
+    padding: 0 20px 8px !important;
+    scroll-snap-type: x mandatory !important;
+  }
+
+  .trend-cards-section .trend-card {
+    width: auto !important;
+    min-width: 130px !important;
+    scroll-snap-align: start !important;
+  }
+
+  .prod-grid-section .prod-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    padding: 0 20px !important;
+    gap: 14px !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PRODUCT CARD — DESKTOP HOVER EFFECTS
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .p-card {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .p-card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .p-card__img-wrap img {
+    transition: transform 0.45s ease;
+  }
+
+  .p-card:hover .p-card__img-wrap img {
+    transform: scale(1.06);
+  }
+
+  .p-card__wish {
+    width: 38px;
+    height: 38px;
+    opacity: 1;
+  }
+
+  .p-card__add {
+    font-size: 12px;
+    padding: 11px 0;
+    letter-spacing: 0.07em;
+  }
+
+  .wishlist-btn {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+  }
+
+  /* prod-card (shop page variant) */
+  .prod-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: box-shadow 0.28s ease;
+  }
+
+  .prod-card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  .prod-img-wrap img {
+    transition: transform 0.42s ease;
+  }
+
+  .prod-card:hover .prod-img-wrap img {
+    transform: scale(1.05);
+  }
+
+  .prod-add-btn {
+    opacity: 0;
+    transition: opacity 0.22s ease;
+    font-size: 12px;
+    padding: 10px 0;
+    letter-spacing: 0.06em;
+  }
+
+  .prod-card:hover .prod-add-btn {
+    opacity: 1;
+  }
+
+  .prod-brand {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .prod-title {
+    font-size: 13px;
+  }
+
+  .prod-price {
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .prod-info {
+    padding: 10px 10px 12px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SHOP PAGE SIDEBAR + TOP BAR
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .shop-layout {
+    padding-top: 8px;
+  }
+
+  .filter-sidebar {
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm, 0 2px 8px rgba(0, 0, 0, 0.07));
+  }
+
+  .filter-sidebar-title {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .shop-main .prod-grid {
+    gap: 18px;
+  }
+
+  .shop-desktop-top {
+    border-radius: 8px;
+    background: #fafafa;
+    padding: 10px 14px;
+    border: 1px solid var(--border, #EAEAEC);
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PROMO + CASHBACK STRIPS
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .promo-strip {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    font-size: 13px;
+    padding: 11px 32px;
+    justify-content: center;
+    gap: 14px;
+  }
+
+  .promo-strip-code {
+    font-size: 12px;
+    padding: 3px 12px;
+  }
+
+  .cashback-strip {
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    padding: 9px 32px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PRODUCT DETAIL PAGE (PDP)
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .product-container {
+    padding: 28px 40px !important;
+    max-width: 1200px !important;
+    gap: 52px !important;
+    margin: 0 auto;
+  }
+
+  .pdp-layout {
+    align-items: start;
+  }
+
+  .pdp-gallery {
+    position: sticky;
+    top: calc(var(--desktop-header-total, 118px) + 24px);
+    /* Accounts for your header height */
+    height: fit-content;
+    /* Prevents the gallery from taking up the full parent height */
+    max-height: calc(100vh - var(--desktop-header-total, 118px) - 40px);
+  }
+
+  .pdp-main-image-wrap {
+    max-height: calc(100vh - var(--desktop-header-total, 118px) - 40px);
+  }
+
+  .product-title {
+    font-size: 1.3rem !important;
+    line-height: 1.35 !important;
+  }
+
+  .current-price {
+    font-size: 1.75rem !important;
+  }
+
+  .size-btn span {
+    min-width: 50px !important;
+    height: 50px !important;
+    font-size: 14px !important;
+  }
+
+  .cta-group {
+    gap: 14px !important;
+  }
+
+  .breadcrumb {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 40px;
+    font-size: 13px;
+    color: var(--muted, #94969F);
+  }
+
+  .breadcrumb a {
+    color: var(--muted, #94969F);
+  }
+
+  .breadcrumb a:hover {
+    color: var(--pink, #FF3F6C);
+  }
+
+  /* Desktop: stacked thumbnails on left */
+  .pdp-thumbs {
+    flex-direction: column;
+    overflow-x: visible;
+    overflow-y: auto;
+    max-height: 520px;
+  }
+
+  .pdp-thumb {
+    width: 68px;
+    height: 84px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SECTION HEADERS — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .m-section-header {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 22px 32px 12px;
+  }
+
+  .m-section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .m-section-link {
+    font-size: 13px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CHECKOUT — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .co-layout {
+    max-width: 1200px !important;
+    margin: 0 auto;
+    gap: 32px !important;
+    grid-template-columns: 1.4fr 0.85fr !important;
+    padding: 32px 40px !important;
+  }
+
+  .co-card {
+    border-radius: 12px !important;
+  }
+
+  .co-card-title {
+    font-size: 1rem !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   DASHBOARD — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .profile-page {
+    max-width: 940px !important;
+  }
+
+  .quick-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   WISHLIST + SEARCH RESULTS — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .page-header {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 20px 32px;
+  }
+
+  .wishlist-grid {
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 18px !important;
+    padding: 20px 32px !important;
+    max-width: var(--max-w, 1400px) !important;
+    margin: 0 auto;
+  }
+
+  .search-results-header {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 20px 32px 8px;
+  }
+
+  .search-results-grid {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 0 32px;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 18px !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ORDERS PAGE — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 768px) {
+  .orders-page {
+    max-width: 1200px !important;
+    padding: 0 24px;
+    background: transparent !important;
+  }
+
+  .orders-header {
+    position: relative !important;
+    top: auto !important;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+
+  .orders-layout {
+    display: grid;
+    grid-template-columns: 1fr 310px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .orders-side-col {
+    display: block !important;
+  }
+
+  .reco-section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    border: 1px solid var(--border, #EAEAEC);
+  }
+
+  .reco-scroll {
+    overflow-x: visible !important;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .reco-card {
+    flex-shrink: unset !important;
+    min-width: unset !important;
+  }
+
+  .order-group {
+    border-radius: 10px !important;
+    overflow: hidden;
+  }
+
+  .order-product-row {
+    gap: 20px !important;
+  }
+
+  .order-prod-img {
+    width: 90px !important;
+    height: 112px !important;
+    border-radius: 6px !important;
+  }
+
+  .live-updates {
+    border-radius: 10px !important;
+    padding: 18px 20px !important;
+  }
+
+  .insider-banner {
+    border-radius: 10px !important;
+    padding: 20px !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   AUTH PAGES — DESKTOP
+   The login.php inline <style> block defines the canonical grid
+   layout (max-width: 1180px, 1.1fr/0.9fr grid, gap, padding,
+   panel border-radius/backgrounds/shadows). This block only adds
+   purely additive desktop enhancements that do NOT override
+   layout, sizing, colours or spacing already set inline.
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  body.auth-body {
+    padding-bottom: 0;
+  }
+
+  /* Ensure the left panel is visible on desktop */
+  .auth-left-panel {
+    display: flex;
+  }
+
+  /* Subtle text refinements only — no layout overrides */
+  .auth-title {
+    font-size: 1.65rem;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   GENERIC CONTENT PAGES — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .page-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  .info-page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  .static-page-content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 32px;
+  }
+
+  .thankyou-card {
+    max-width: 560px;
+    margin: 40px auto;
+    border-radius: 14px;
+    border: 1px solid var(--border, #EAEAEC);
+    box-shadow: var(--shadow-md, 0 4px 18px rgba(0, 0, 0, 0.10));
+  }
+
+  .empty-state {
+    padding: 80px 40px;
+  }
+
+  .empty-state h2 {
+    font-size: 1.4rem;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-wrap {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .section {
+    padding: 72px 32px;
+  }
+
+  .container {
+    padding: 0 32px;
+  }
+
+  body {
+    font-size: 14.5px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   TRUST STRIP — DESKTOP (4 columns)
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .trust-strip {
+    justify-content: center;
+  }
+
+  .trust-item {
+    min-width: unset;
+    flex: 0 0 200px;
+  }
+
+  .trust-item__label {
+    font-size: 12px;
+  }
+
+  .trust-item__sub {
+    font-size: 11px;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FOOTER — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  footer {
+    padding: 52px 40px 40px;
+    border-top: 8px solid var(--surface, #F8F8F8);
+  }
+
+  .footer-brand-name {
+    font-size: 1.75rem;
+    margin-bottom: 14px;
+  }
+
+  .footer-brand-desc {
+    font-size: 14px;
+    line-height: 1.8;
+    max-width: 290px;
+  }
+
+  .footer-social {
+    margin-top: 22px;
+    gap: 12px;
+  }
+
+  .footer-social a {
+    width: 38px;
+    height: 38px;
+    transition: all 0.2s ease;
+  }
+
+  .footer-col-title {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    margin-bottom: 20px;
+  }
+
+  .footer-col-links {
+    gap: 12px;
+  }
+
+  .footer-col-links a {
+    font-size: 14px;
+  }
+
+  .footer-bottom {
+    padding-top: 24px;
+    font-size: 13px;
+  }
+
+  .desktop-footer-cols {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 40px !important;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CART DRAWER — DESKTOP
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .cart-drawer {
+    width: 460px;
+  }
+
+  .cart-header {
+    padding: 24px 26px;
+  }
+
+  .cart-title {
+    font-size: 1.1rem;
+  }
+
+  .cart-body {
+    padding: 22px 24px;
+  }
+
+  .cart-item-img {
+    width: 80px;
+    height: 100px;
+    border-radius: 8px;
+  }
+
+  .cart-item-title {
+    font-size: 15px;
+  }
+
+  .cart-footer {
+    padding: 20px 24px 24px;
+  }
+
+  .cart-total-row {
+    font-size: 1.05rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NAV LINKS — DESKTOP HORIZONTAL
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 769px) {
+  .nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   GENERAL DESKTOP TYPOGRAPHY
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  h1 {
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+  }
+
+  h3 {
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PROMO CARDS — DESKTOP 3-COLUMN GRID
+   ════════════════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  .promo-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .promo-card {
+    min-height: 160px;
+  }
+
+  .promo-cards-section {
+    max-width: var(--max-w, 1400px);
+    margin: 0 auto;
+    padding: 0 32px 24px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .promo-cards-section {
+    max-width: var(--max-w, 1400px);
+  }
+}
+
+/* ── Insider banner separator ────────────────────────────────── */
+@media (min-width: 1024px) {
+  .insider-wrap {
+    border-top: 1px solid var(--border, #EAEAEC);
+  }
+}
+
+/* ── Two-panel section layout ────────────────────────────────── */
+@media (min-width: 1024px) {
+  .section-flex {
+    display: flex;
+    gap: 40px;
+    flex-direction: row;
+  }
+}
+
+/* ── Generic products flex grid ─────────────────────────────── */
+@media (min-width: 768px) {
+  .products .product-card {
+    width: 48%;
+  }
+
+  .hero-banner {
+    height: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .products .product-card {
+    width: 23%;
+  }
+
+  .hero-banner {
+    height: 420px;
+  }
+}
+
+/* ── Results grid hover ──────────────────────────────────────── */
+@media (min-width: 768px) {
+
+  .results-grid .product-card,
+  .products .product-card {
+    transition: box-shadow 0.25s ease;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .results-grid .product-card:hover,
+  .products .product-card:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.11);
+  }
+}
+/* FORCE sticky header on all devices */
+.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+}
